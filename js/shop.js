@@ -1,6 +1,6 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
 var products = [
-   {
+    {
         id: 1,
         name: 'cooking oil',
         price: 10.5,
@@ -18,6 +18,7 @@ var products = [
     },
     {
         id: 3,
+        // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
         name: 'Instant cupcake mixture',
         price: 5,
         type: 'grocery',
@@ -28,6 +29,7 @@ var products = [
     },
     {
         id: 4,
+        // Using the "cartlist" array that contains all the items in the shopping cart, 
         name: 'All-in-one',
         price: 260,
         type: 'beauty'
@@ -66,7 +68,6 @@ var products = [
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 var cartList = [];
 
-// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
 
 var total = 0;
@@ -75,22 +76,77 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
+
+    for (i = 0; i < products.length; i++) {
+        if (id == products[i].id) {
+            cartList.push(products[i]);
+        }
+    }
+    console.log(cartList);
 }
 
 // Exercise 2
 function cleanCart() {
-
+    cartList.length = 0;
+    console.log(cleanCart);
 }
 
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    for (i = 0; i < cartList.length; i++) {
+        total += cartList[i].price;
+        //console.log(total);
+    }
 }
 
 // Exercise 4
 function generateCart() {
+
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+
+    // Crear bucle en carList y hemos de validar cada elemento si existe en el array cart.
+    // Si no existe: añadimos ese elemento al array cart y le agregamos la propietat quantity amb valor 1, después hacer push).   
+    // Si existe el elemento.id en el array cart, lo único que tenemos que hacer es incrementar la propiedad quantity + 1 (en el array cart).
+
+    for (i = 0; i < cartList.length; i++) {
+        let validate = false;
+        for (j = 0; j < cart.length; j++) {
+            if (cartList[i].id == cart[j].id) {
+                validate = true;
+                break;
+            }
+        }
+        if (!validate) {
+            cartList[i].quantity = 1;
+            cart.push(cartList[i]);
+        }
+    }
+
+    if (validate) {
+        cart[j].quantity += 1;
+    }
+    console.log(cart);
+
+    /*for (i = 0; i < cartList.length; i++) {
+
+        for (n = 0; n < cart.length; n++) {
+            if (cartList[i].id === cart[n].id) {
+                cart[n].qty = cart[n].qty + 1;
+            } else {
+                cartList[i].qty = 1;
+                cart.push(cartList[i]);
+            }
+        }
+        // para que entre hay q decirle que 
+        if (cart.length === 0) {
+            cartList[i].qty = 1;
+            cart.push(cartList[i]);
+        }
+
+    }
+    console.log(cart);*/
 }
 
 // Exercise 5
@@ -119,7 +175,7 @@ function removeFromCart(id) {
     // 2. Add found product to the cartList array
 }
 
-function open_modal(){
-	console.log("Open Modal");
-	printCart();
+function open_modal() {
+    console.log("Open Modal");
+    printCart();
 }
