@@ -127,31 +127,23 @@ function generateCart() {
     if (validate) {
         cart[j].quantity += 1;
     }
-    console.log(cart);
-
-    /*for (i = 0; i < cartList.length; i++) {
-
-        for (n = 0; n < cart.length; n++) {
-            if (cartList[i].id === cart[n].id) {
-                cart[n].qty = cart[n].qty + 1;
-            } else {
-                cartList[i].qty = 1;
-                cart.push(cartList[i]);
-            }
-        }
-        // para que entre hay q decirle que 
-        if (cart.length === 0) {
-            cartList[i].qty = 1;
-            cart.push(cartList[i]);
-        }
-
-    }
-    console.log(cart);*/
 }
 
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+
+    for (i = 0; i < cart.length; i++) {
+        const validateOffer = cart[i].offer;
+
+        if (validateOffer && cart[i].quantity >= cart[i].offer.number) {
+            let discount = cart[i].price * (cart[i].offer.percent / 100);
+            cart[i].subtotalWithDiscount = cart[i].price - discount;
+
+        } else {
+            cart[i].subtotalWithDiscount = cart[i].price;
+        }
+    }
 }
 
 // Exercise 6
