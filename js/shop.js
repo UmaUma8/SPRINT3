@@ -127,6 +127,7 @@ function generateCart() {
     if (validate) {
         cart[j].quantity += 1;
     }
+    console.log(cart)
 }
 
 // Exercise 5
@@ -149,6 +150,33 @@ function applyPromotionsCart() {
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    const table = document.getElementById("cart_list");
+
+    table.innerHTML = "";
+
+    for (i = 0; i < cart.length; i++) {
+        let row = `<tr>
+                    <td>${cart[i].name}</td>
+                    <td>${cart[i].price}</td>
+                    <td>${cart[i].quantity}</td>
+                    <td>${cart[i].subtotalWithDiscount}</td>
+        </tr>`
+        if (cart[i] === cart.id) {
+
+        } else {
+            `<tr>
+            <td>${cart[i].name}</td>
+        <td>${cart[i].price}</td>
+        <td>${cart[i].quantity}</td>
+        <td>${cart[i].subtotal}</td>
+</tr>`
+        }
+
+        table.innerHTML += row;
+        console.log(cart)
+    }
+
 }
 
 
